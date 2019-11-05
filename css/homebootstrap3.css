@@ -1,0 +1,55 @@
+.row {
+  background: #f8f9fa;
+  margin-top: 20px;
+}
+
+.col {
+  border: solid 1px #6c757d;
+  padding: 10px;
+}
+
+.opacity {
+  opacity: 1;
+}
+
+.view {
+    background: url("https://mdbootstrap.com/img/Photos/Others/img (40).jpg")no-repeat center center;
+    background-size: cover;
+}
+
+.navbar {
+    background-color: transparent;
+}
+
+.top-nav-collapse {
+    background-color: #4285F4;
+}
+
+@media only screen and (max-width: 768px) {
+    .navbar {
+        background-color: #4285F4;
+    }
+}
+
+html,
+body,
+header,
+.view {
+  height: 100%;
+}
+
+body, html {
+  height: 100%;
+}
+
+.bg {
+
+  /* Full height */
+  height: 200;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: repeat;
+  background-size: cover;
+  background-color: #844df1;
+}
