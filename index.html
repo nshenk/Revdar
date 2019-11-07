@@ -180,7 +180,9 @@
              var marker = L.marker(coordinates, {icon: clear});
              var pic = feature.properties.shareimage
              var name = feature.properties.name
-             marker.bindPopup('<center>' + '<a href=' + pic + ' target=\"_blank\" title=\"Opens in a new window\">' + '<img src=' + pic + ' alt="Related Image" style="width:300px;height:200px;"></a>' + '<h1 style="color:white;">' + feature.properties.name + '</h1>' + '<h2>' + '<p style="color:white;">'  + '</h2>' + '<p>' + '<a href="https://api.gdeltproject.org/api/v2/doc/doc?query=%22' + name + '%20protests%22&mode=artgallery&sort=hybridrel" style="color: white" target=\"_blank\" title=\"Opens in a new window\"><h2>Article Gallery</h2></a>'+ '<p>' + '</center>');
+             var oxen = name.replace(/ .*/,' ');
+             $('body').append(oxen);
+             marker.bindPopup('<center>' + '<a href=' + pic + ' target=\"_blank\" title=\"Opens in a new window\">' + '<img src=' + pic + ' alt="Related Image" style="width:300px;height:200px;"></a>' + '<h1 style="color:white;">' + name + '</h1>' + '<h2>' + '<p style="color:white;">'  + '</h2>' + '<p>' + '<a href="https://api.gdeltproject.org/api/v2/doc/doc?query=%22' + oxen + '%20protests%22&mode=artgallery&sort=hybridrel" style="color: white" target=\"_blank\" title=\"Opens in a new window\"><h2>Article Gallery</h2></a>'+ '<p>' + '</center>');
              return marker;
            }
          } ).addTo(map);
