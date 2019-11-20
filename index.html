@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en-US" xmlns="https://www.w3.org/1999/xhtml">
    <head profile="https://gmpg.org/xfn/11">
+      <title>Revdar</title>
+      <link rel="icon" href="https://www.freeiconspng.com/uploads/fist-png-27.png">
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
       <link rel="stylesheet" type="text/css" href="css/leafletstyle.css" />
       <link rel="stylesheet" type="text/css" href="css/main.css" />
@@ -14,7 +16,15 @@
       <script src="js/leaflet-providers.js"></script>
       <script src="js/leaflet-heatlayer.js"></script>
       <link rel="stylesheet" href="css/leafletcss.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
       <script src="js/leafletbutton.js"></script>
+      <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+      <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+      <link rel="stylesheet" type="text/css" href="leaflet.social.css" />
+      <script src="leaflet.social.js"></script>
+      <script type='text/javascript' src="https://raw.github.com/mlevans/leaflet-hash/master/leaflet-hash.js"></script>
+
    </head>
    <style>
       #loader-wrapper .loader-section {
@@ -22,7 +32,7 @@
           top: 0;
           width: 51%;
           height: 100%;
-          background: #222222;
+          background: #010138;
           z-index: 1000;
       }
       #loader-wrapper .loader-section.section-left {
@@ -67,6 +77,9 @@
              -webkit-transition: all 0.3s 0.6s ease-out;
                      transition: all 0.3s 0.6s ease-out;
       }
+      .leaflet-popup-tip {
+        background-color: #1D1E3C;
+      }
       body {
       	padding: 0;
       	margin: 0;
@@ -84,6 +97,7 @@
       }
       .container {
         height: 100%;
+        padding: 0;
       }
       .leaflet-popup-close-button {
         display: none;
@@ -97,25 +111,44 @@
       }
       #zoom .easy-button-button{
         transition-duration: .3s;
-        position: relative;
-        border-radius: 4px;
+        position: absolute;
+        border-radius: 0px;
         border: solid 0px transparent;
       }
       #zoom .easy-button-container{
         background-color: white;
+        padding: 0;
       }
       #zoom .zoom-btn{
         position: absolute;
         top: 0;
-        left: 0;
       }
       #zoom .easy-button-button.disabled {
         height: 0;
       }
-      .quest{
-        font-size: 1.5em;
-        cursor: pointer;
+      .leaflet-bar button {
+        height: 30px !important; /* easyButton's height default */
+        width: 40px !important;  /*  easyButton's width default */
+        text-align: center;
         position: relative;
+        right: 4.5px;
+        
+      }
+      .quest {
+        font-size: 1em;
+        cursor: pointer !important;
+        position: center !important;
+        text-align: center !important;
+      }
+      .picture {
+          display: block;
+          position: relative;
+          right: 19.9px;
+          width: 340.8px;
+          height: 205px;
+      }
+      a {
+          text-decoration: none;
       }
    </style>
 
@@ -141,20 +174,19 @@
       });
       //Map init
       var map = L.map( 'map', {
+           fullscreenControl: true,
            center: [20.0, 5.0],
            minZoom: 2,
-           zoom: 3,
+           zoom: 3
        });
        //Additional buttons
-       L.easyButton( '<span class="quest">&curren;</span>', function(){
+       L.easyButton( '<span style="center" class="fa fa-map"></span>', function(){
          map.setZoom(2);
        }).addTo(map);
-//       L.easyButton( '<span class="quest">&nearhk;</span>', function(){
-//         alert("Share");
-//       }).addTo(map);
-       L.easyButton( '<span class="quest">&quest;</span>', function(){
-         location.href = '/html/info.html';
+       L.easyButton( '<span style="center" class="fa fa-question"></span>', function(){
+         location.href = '/info.html';
        }).addTo(map);
+       L.control.social({default_text: "Live protest map"}).addTo(map);
       //Background layer (NASA night images)
        L.tileLayer('https://map1.vis.earthdata.nasa.gov/wmts-webmerc/VIIRS_CityLights_2012/default/{time}/{tilematrixset}{maxZoom}/{z}/{y}/{x}.{format}', {
          attribution: '&copyRevdar &copyNASA &copyGDELT &copyOpenStreetMaps Contributors',
@@ -165,6 +197,14 @@
          time: '',
          tilematrixset: 'GoogleMapsCompatible_Level'
        }).addTo(map);
+        var southWest = L.latLng(-89.98155760646617, -180),
+        northEast = L.latLng(89.99346179538875, 180);
+        var bounds = L.latLngBounds(southWest, northEast);
+
+        map.setMaxBounds(bounds);
+        map.on('drag', function() {
+            map.panInsideBounds(bounds, { animate: false });
+        });
        //Transparent icon to create clickable points
        var clear = L.icon({
          iconUrl: 'http://www.cityrider.com/fixed/43aspect.png',
@@ -173,15 +213,16 @@
          popupAnchor: [0, 0],
        });
        //Takes points from GeoJson and puts them on map with a popup for each one
-       $.getJSON("https://api.gdeltproject.org/api/v2/geo/geo?&query=(-beijing%20protests%20OR%20protests%20OR%20protesters%20OR%20riots)&mode=pointdata&format=geojson&maxpoints=75&timespan=12h",function(data){
+       $.getJSON("https://api.gdeltproject.org/api/v2/geo/geo?query=(-beijing%20OR%20-dubai%20OR%20protests%20OR%20protest)&mode=pointdata&format=geojson&maxpoints=75&timespan=2d&geores=1",function(data){
          addObsToMap(data, map);
          L.geoJson(data ,{
            pointToLayer: function(feature,coordinates){
              var marker = L.marker(coordinates, {icon: clear});
              var pic = feature.properties.shareimage
              var name = feature.properties.name
+             var count = feature.properties.count
              var oxen = name.replace(/,.*/,' ');
-             marker.bindPopup('<center>' + '<a href=' + pic + ' target=\"_blank\" title=\"Opens in a new window\">' + '<img src=' + pic + ' alt="Related Image" style="width:300px;height:200px;"></a>' + '<h1 style="color:white;">' + name + '</h1>' + '<h2>' + '<p style="color:white;">'  + '</h2>' + '<p>' + '<a href="https://api.gdeltproject.org/api/v2/doc/doc?query=%22' + oxen + '%20protests%22&mode=artgallery&sort=hybridrel" style="color: white" target=\"_blank\" title=\"Opens in a new window\"><h2>Article Gallery</h2></a>'+ '<p>' + '</center>');
+             marker.bindPopup('<center>' + '<a href=' + pic + ' target=\"_blank\" title=\"Opens in a new window\">' + '<img src=' + pic + ' alt="Live Protest Map" class="picture"></a>' + '<h1 style="color:white;">' + '<b>' + name + '</b>' + '</h1>' + '<h2>' + '<p style="color:white;">'  + 'Mass: ' + count + '</h2>' + '<p>' + '<a href="https://api.gdeltproject.org/api/v2/doc/doc?query=%22' + oxen + 'protests%22&mode=artgallery&sort=hybridrel" style="color: white" target=\"_blank\" title=\"Opens in a new window\"><h2><b>Article Gallery</h2></a>' + '<p>' + '<a href="https://www.google.com/search?q=' + oxen + 'protests" style="color: white" target=\"_blank\" title=\"Opens in a new window\"><h2>Search</h2></a>' + '<p>' + '</center>');
              return marker;
            }
          } ).addTo(map);
@@ -189,13 +230,13 @@
        //Converts GeoJson to correct format for heat layer (coordinates need to be reversed)
        geoJson2heat = function(geojson) {
          return geojson.features.map(function(feature) {
-           return [parseFloat(feature.geometry.coordinates[1]), parseFloat(feature.geometry.coordinates[0]), parseFloat(feature.properties.count)];
+           return [parseFloat(feature.geometry.coordinates[1]), parseFloat(feature.geometry.coordinates[0]), (feature.properties.count)];
          });
        }
        //Creates heat layer
        function addObsToMap(data, map) {
        var geoData = geoJson2heat(data);
-       var heatMap = new L.heatLayer(geoData,{radius: 25, blur: 20, maxZoom: 25, minOpacity: 1, gradient: {0.0: 'blue', 0.95: 'purple', 1.0: 'red'}});
+       var heatMap = new L.heatLayer(geoData,{radius: 30, blur: 25.4, maxZoom: 200, minOpacity: 1, max: 10, gradient: {0.0: 'blue', 0.7: '#43128c', 0.95: 'purple', 1.0: 'red'}});
        map.addLayer(heatMap);
        }
        //Layer protection
