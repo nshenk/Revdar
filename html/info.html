@@ -2,44 +2,121 @@
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="https://www.freeiconspng.com/uploads/fist-png-27.png">
+<title>Revdar - Revolution Radar</title>
 
 <link rel="stylesheet" href="css/bootstrap10.css">
 <link rel="stylesheet" href="css/homeboostrap3.css">
+<link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
 
-
-<!--Main Navigation-->
 <header>
 
-  <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar" style="background-color:#000066;">
-    <a class="navbar-brand"  href="javascript:history.back()"><strong>Revdar</strong></a>
+<style type="text/css">
+  body {
+    padding: 0;
+    margin: 0;
+    color: #fcfffc;
+    background-color: #000000 !important;
+    background: #000000 !important;
+  }
+  .revdar-font {
+    font-family: 'Audiowide';font-size: 30px;
+  }
+  .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited, .button-variant {
+    background-color: #CB2233 !important;
+  }
+  .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #fcfffc;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #000000;
+    display: block;
+    transition: 0.3s;
+  }
+  .sidenav a:hover {
+    color: #0F3581;
+  }
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+</style>
+
+<br/>
+<br/>
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar" style="background-color:#fffcfc;">
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="index"><strong>Home</strong></a>
+      <a href="contact"><strong>Contact</strong></a>
+      <a href="map"><strong>Live Map</strong></a>
+    </div>
+
+    <span class="revdar-font" style="cursor:pointer;color:#CB2233" onclick="openNav()">&#9776; <strong>Revdar</strong></span>
+
+    <script>
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+    </script>
 
   </nav>
 
-  <div class="full-height bg" style="background-color:#000066;">
+  <div class="full-height bg" style="background-color:#000000;">
     <div class="full-height bg">
 
-<!-- nested columns -->
-<div class="m-3 row" style="background-color:#000066; height: 100%; width: 100%;">
+<div class="m-3 row" style="background-color:#00000;">
 
-  <!-- first nested column -->
   <div class="col-md">
     <br/>
     <br/>
-    <h3 class="display-4" style="color: #ffffff;"><center>About</center></h3>
+    <h3 class="display-4" style="color: #ffffff;"><center>Revdar</center></h3>
     <p>
       <center>
-<h3 style="color: #ffffff;">Revdar - Revolution Radar</h3>
+        <br/>
+<h3 style="color: #ffffff;">Revolution Radar</h3>
+<br>
 <br/>
 
 
-<p align="center" style="color: #ffffff;">Revdar is a live global map of protests.</p>
-<p align="center" style="color: #ffffff;">It works by using the GDELT database to index all web articles related to protests that are from the past 12 hours. From this it selects the top 75 locations with the highest article count, and places them on the map, with a heat size directly proportional to its article count.</p>
+<p align="center" style="color: #ffffff;">Revdar is a live map of protests around the world.</p>
+<br/>
+<p align="center" style="color: #ffffff;"><b>Key</b><br/><b>Mass:  </b>   Relative Weight. The mass correlates directly with confidence of the location and size of the protest. A relatively high mass essentially means the protest is more significant.<br/><b>Article Gallery:  </b> A visual representation of articles about the protest, many of which you would not easily find by googling, as Article Gallery searches in most languages and regions.<br/><b>Search:  </b> Searches for the protest on Google. </p>
+<br/>
+<p align="center" style="color: #ffffff;">Revdar works by using the GDELT database to index all web articles related to protests that are from the past 48 hours. From this it selects the top 75 locations with the highest article count, and places them on the map.</p>
+<br/>
 <p align="center" style="color: #ffffff;">For each location, a relevant picture is selected and a gallery of related articles generated.</p>
+<br/>
+<p align="center" style="color: #ffffff;">To use Revdar, simply explore the map and click/tap on points for more information.</p>
+<br/>
 <p align="center" style="color: #ffffff;">While fairly accurate, there are always locations included where protests are not occurring. This is because it's difficult to distinguish whether an article is talking about a past or present protest, and whether the locations mentioned in the article are where the protest is actually taking place.</p>
-<p align="center" style="color: #ffffff;">As we continue development, the accuracy will continue to rise; however, it's important to note that Revdar is to be used as a first resource before doing more research on specific protests.</p>
+<br/>
+<p align="center" style="color: #ffffff;">As development continues the accuracy will continue to rise; however, it's important to note that Revdar is to be used as a first resource before doing more research on specific protests.</p>
 
 <br>
-
-
 
 </html>
