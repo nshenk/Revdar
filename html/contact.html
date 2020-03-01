@@ -1,0 +1,179 @@
+<html>
+    <head>
+        <title>Revdar - Revolution Radar</title>
+        <link rel="icon" href="https://www.freeiconspng.com/uploads/fist-png-27.png">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+        <link href='custom.css' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
+    </head>
+
+    <style type="text/css">
+      body {
+        padding: 0;
+        margin: 0;
+        color: #fcfffc;
+        background-color: #000000 !important;
+        background: #000000 !important;
+      }
+      .revdar-font {
+        font-family: 'Audiowide';font-size: 30px;
+      }
+      .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited, .button-variant {
+        background-color: #CB2233 !important;
+      }
+      .sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #fcfffc;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+      }
+      .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #000000;
+        display: block;
+        transition: 0.3s;
+      }
+      .sidenav a:hover {
+        color: #0F3581;
+      }
+      .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+      }
+      @media screen and (max-height: 450px) {
+        .sidenav {padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
+      }
+    </style>
+
+    <body>
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-xl-8 offset-xl-2 py-5">
+
+                  <form id="contact-form" method="post" action="contact.php" role="form">
+
+                      <div class="messages"></div>
+
+                      <div class="controls">
+
+                        <br/>
+                        <br/>
+                        <br/>
+
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="form_name">First name *</label>
+                                      <input id="form_name" type="text" name="name" class="form-control" placeholder="Please enter your first name *" required="required" data-error="Firstname is required.">
+                                      <div class="help-block with-errors"></div>
+                                  </div>
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="form_lastname">Last name *</label>
+                                      <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Please enter your last name *" required="required" data-error="Lastname is required.">
+                                      <div class="help-block with-errors"></div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="form_email">Email *</label>
+                                      <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email *" required="required" data-error="Valid email is required.">
+                                      <div class="help-block with-errors"></div>
+                                  </div>
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="form_need">Reason *</label>
+                                      <select id="form_need" name="need" class="form-control" required="required" data-error="Please specify your need.">
+                                          <option value=""></option>
+                                          <option value="Request quotation">Feedback</option>
+                                          <option value="Request order status">Issue</option>
+                                          <option value="Request copy of an invoice">Question</option>
+                                          <option value="Other">Other</option>
+                                      </select>
+                                      <div class="help-block with-errors"></div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <div class="form-group">
+                                      <label for="form_message">Message *</label>
+                                      <textarea id="form_message" name="message" class="form-control" placeholder="Message *" rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                                      <div class="help-block with-errors"></div>
+                                  </div>
+                              </div>
+                              <div class="col-md-12">
+                                  <input type="submit" class="btn btn-success btn-send" style="background-color:#CB2233 !important;border-color: white !important;" value="Send message">
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <p class="text-muted">
+                                      <strong>*</strong> These fields are required.
+                                  </p>
+                              </div>
+                          </div>
+                      </div>
+
+                  </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <header>
+          <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar" style="background-color:#fffcfc;">
+          <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="index"><strong>Home</strong></a>
+            <a href="info"><strong>How it works</strong></a>
+            <a href="map"><strong>Live Map</strong></a>
+          </div>
+
+          <span class="revdar-font" style="cursor:pointer;color:#CB2233" onclick="openNav()">&#9776; <strong>Revdar</strong></span>
+
+          <script>
+          function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+          }
+
+          function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+          }
+          </script>
+
+        </nav>
+        </header>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js" integrity="sha256-dHf/YjH1A4tewEsKUSmNnV05DDbfGN3g7NMq86xgGh8=" crossorigin="anonymous"></script>
+        <script src="contact.js"></script>
+
+    </body>
+</html>
